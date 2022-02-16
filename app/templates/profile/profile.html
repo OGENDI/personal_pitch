@@ -1,0 +1,83 @@
+{% extends 'base.html'%}
+
+{% import 'macros.html' as macro %}
+
+{% block title %}
+    Pitch| Profile
+{% endblock%}
+
+{% block content %}
+<div class="container">
+<div class="row">
+  <!-- displaying  Username-->
+  <div class="col-md-8">
+    <h3 class="text-center"> {{user.username| capitalize}} </h3>
+    
+    <!--Display profile photo-->
+    {% if user.profile_pic_path %}
+    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+    {%else%}
+    <p>No profile picture</p>
+    {% endif %}
+    
+    <p>{{ user.email}}</p>
+    <!--Displaying user bio-->
+    {% if user.bio %}
+      <p> {{user.bio}}</p>
+    {%else%}
+      <p> {{user.username| capitalize}} has no bio </p>
+    {% endif %}
+
+    {% if user == current_user %}
+    <a href="{{url_for('root.update_profile',uname=user.username)}}">Edit profile</a>
+    {% endif %}
+
+    
+  </div>  
+  <div class="col-md-4">
+    <!-- Upload an image -->
+    {% if user == current_user %}
+    <form  action="{{url_for('root.update_pic',uname=user.username)}}" method="POST" enctype = "multipart/form-data">
+
+      <input type="file"  name="photo" class="form-control" required>
+      <input type="submit">
+    </form>
+      {% endif %}
+  </div>
+</div>
+<div>
+  <h3>Contributed Pitches</h3>
+  <div class=" d-flex flex-wrap justify-content-around " > 
+
+    {% if Pitches %}
+          {% for my_pitch in Pitches %}
+              <div class="card text-center w-25 mb-1">
+                <div class="card-header text-light" style="background-color: #270219;">
+                  <h5>{{my_pitch.category}}</h5>			
+                </div>
+                <div class="card-body">
+                <h5 class="card-title">{{ my_pitch.title}}</h5>
+                <p class="card-text word-wrap">{{my_pitch.description}}</p>
+                <footer class="blockquote-footer"> Posted by {{my_pitch.user.username}}</footer>
+                <div class="d-flex flex-wrap justify-content-around align-items-center ">
+                  <a href="{{url_for('root.new_comment',pitch_id = my_pitch.pid)}}" class="btn btn-info"> Add a comment</a>
+                  <a href="{{url_for('root.upvote_pitch',pitch_id = my_pitch.pid)}}" class="btn btn-success btn-sm">Upvote<span  class="rounded-circle bg-light text-black p-1">{{my_pitch.upvotes.count()}}</span></a>
+                  <a href="{{url_for('root.downvote_pitch',pitch_id = my_pitch.pid)}}" class="btn btn-secondary btn-sm">Downvote<span class="rounded-circle bg-light text-black p-1" >{{my_pitch.downvotes.count()}}</span></a>
+                </div>			
+                </div>
+                <div class="card-footer text-muted" style="background-color: #12355b;">
+                  Posted on {{ my_pitch.posted.strftime('%I:%M %p') |strftime }}
+                </div>
+              </div>			
+		      {% endfor %}
+
+      
+
+      {% else%}
+      <h6>You have not Pitched Yet <span><a href="/pitches/new"> Pitch here </a></span> </h6>
+    {% endif %}
+  </div>
+  
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+Hello {{user.username}}
+Welcome to Pitchers Hub
+We have just seen you have signed up for our application and want to welcome you to the family. Please enjoy  our various categories of pitches. Now you can comment, vote or downvote any pitch category.
+Your joining here to this platform is going to save many.
+
+Thanks once again.
+
+Pitchers Hub

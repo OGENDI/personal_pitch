@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+<!--  -->
+{% block title %}
+    Pitch| Business
+{% endblock%}
+<!--  -->
+{% block styles %}
+{% endblock %}
+
+<!--  -->
+{% block content %}
+    <main class="container-fluid mb-4 h-100 ">
+
+        {% block scroller %}
+            {% include 'scroll.html' %}
+        {% endblock %}
+
+        <h1 class="text-center"> {{ title }}</h1>
+        <h2><a href="/pitches/new"> Write your Pitch </a></h2>
+    
+        <div class="tab-content">
+            <div  class="d-flex flex-wrap justify-content-between"><br>
+                {{ macro.display(Business) }}
+            </div>    
+        </div>
+    </main>
+
+{% endblock %}

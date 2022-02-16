@@ -1,0 +1,26 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card text-center mb-1">
+    <div class="card-header text-light" style="background-color: #270219;">
+        <marquee behavior="" scrollamount="" direction="left"> <h4> You only have 60 seconds to impress someone. 1 minute can make or break a Person.Make use of 1 minute to  say something meaningful</h4></marquee>
+        </div>
+    {{wtf.quick_form(form)}}
+ </div>
+    <ul>
+    {% for pitch in pitchlist %}
+        <div class="card-body">
+        <h5 class="card-title">{{pitch.pitch_id}}</h5>
+        <p class="card-text">{{ pitch.description }}</p>
+        <h6> Posted by {{user.username}}.</h6>
+    
+        </div>
+        <div class="card-footer text-muted" style="background-color: #12355b;">
+        2 days ago
+        </div>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}

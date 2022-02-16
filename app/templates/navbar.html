@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-light py-4" style='background-color:#270219'>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src='{{ url_for('static',filename='pitch.png')}}' class='rounded-3' alt="" width="90" height="75" />
+      </a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse  navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto text-center fs-3  fw-bolder mb-2 mb-lg-0" role="tablist" >
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white disabled text-light" data-toggle="tab" href=""> Categories > </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white "  href="/life"> Life </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white "  href="/business"> Business </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white "  href="/love"> Love </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white "  href="/coding"> Coding </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link text-white "  href="/finance"> Finance </a>
+          </li>                       
+        </ul>  
+              
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_authenticated %} <!-- Current user is a variable that is defined by flask-login and is made available to all the view functions and templates -->
+       
+       <h4 class="py-3 text-center rounded-circle" >
+              <a class="text-light text-decoration-none px-2 " href="{{url_for('root.profile',uname=current_user.username)}}"> 
+                {% if current_user.profile_pic_path %}
+                <img src="{{url_for('static',filename=current_user.profile_pic_path)}}" width="'100" alt="" class="profile img-fluid rounded-circle">
+                 {% else %} 
+                <img src="{{url_for('static',filename='uploads/myprof.png')}}" width="'100" alt="" class="profile img-fluid rounded-circle">
+
+                {% endif %}
+                
+        </h4>
+       <p class=" " ><a class="text-light text-decoration-none px-2 " href="{{url_for('auth.logout')}}">Logout</a></p>
+       {% else %}
+       <h6><a class="text-light text-decoration-none p-2" href="{{url_for('auth.login')}}">Login</a></h6>
+       {%endif%}
+   </ul>
+    </div>
+    
+  </nav>

@@ -1,0 +1,52 @@
+{% macro display(category_list) %}
+
+{% if category_list %}
+{% for category in category_list %}
+<div class="card text-center w-25 mb-1">
+	<div class="card-header text-light" style="background-color: #270219;">
+		<h5>{{category.category}}</h5>
+	</div>
+	<div class="card-body">
+		<h5 class="card-title">{{category.title}}</h5>
+		<p class="card-text word-wrap">{{category.description}}</p>
+		<footer class="blockquote-footer"> Posted by {{category.user.username}}</footer>
+		<div class="d-flex flex-wrap justify-content-around align-items-center ">
+			<a href="{{url_for('root.new_comment',pitch_id = category.pid)}}" class="btn btn-info"> Add a comment</a>
+			<a href="{{url_for('root.upvote_pitch',pitch_id = category.pid)}}"
+				class="btn btn-success btn-sm">Upvote<span
+					class="rounded-circle bg-light text-black p-1">{{category.upvotes.count()}}</span></a>
+			<a href="{{url_for('root.downvote_pitch',pitch_id = category.pid)}}"
+				class="btn btn-secondary btn-sm">Downvote<span
+					class="rounded-circle bg-light text-black p-1">{{category.downvotes.count()}}</span></a>
+		</div>
+	</div>
+	<div class="card-footer text-muted" style="background-color: #12355b;">
+		Posted on {{ category.posted.strftime('%I:%M %p') |strftime }}
+	</div>
+</div>
+
+
+{% endfor %}
+{% else %}
+{% endif %}
+
+{% endmacro %}
+
+
+{% macro displayComment(comments) %}
+	<ul>
+		{% if comments %}
+		{% for comment in comments %}
+		<div class="row ">
+			<p class=" w-75 text-light mt-2 m-auto p-2 "
+				style="background-color: #270219; border-radius: 20px 20px 20px 0;">{{ comment.description }} <br>
+				<span class="float-end"> ~~Posted by {{comment.user.username}}</span>
+			</p>
+		</div>
+		{% endfor %}
+		{% else %}
+		<h4>This post does not does not have any comments yet !</h4>
+		{%endif%}
+	</ul>
+
+{% endmacro %}

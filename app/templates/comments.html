@@ -1,0 +1,36 @@
+{% import 'macros.html' as macro %}
+
+{% extends 'base.html' %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+
+<div class="row">
+    <div class="card">
+        <div class="card-body text-center">
+            <h4><a>{{pitch.title}}</a></h4>
+            <h5 class="card-text text-center">{{pitch.description}}.</h5>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 m-auto">
+                {{wtf.quick_form(form)}}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="container-fluid ">
+        <h4>What people think about this Pitch</h4>   
+        <div class="d-flex flex-column justify-content-around">
+            {{ macro.displayComment(comment) }}
+        </div>             
+    </div>
+</div>
+
+
+{% endblock %}

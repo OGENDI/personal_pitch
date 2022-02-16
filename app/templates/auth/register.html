@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
+
+{% block content %}
+<div class="container  p-2">
+    <div class="row">
+        <div class="col-md-2">  </div>
+        <div class="col-md-8">
+            <div class=" text-center p-4" style="border-radius: 40px 40px 0  0; background-color: #270219;">
+                <h3 class="text-light">Sign Up proceed</h3>
+            </div>
+
+            {{wtf.quick_form(registration_form)}}
+
+            <div class="bg-primary text-light text-center p-4" style="border-radius:0 0 40px 40px; background-color: #12355b;">
+                <h5 > &copy; Pitcchers Hub| Life savers</h5>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    </div>
+
+{% endblock%}

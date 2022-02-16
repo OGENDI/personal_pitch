@@ -96,7 +96,7 @@ The user would like to.... :
 
 ## Contact Information 
 
-If you have any question or contributions, please email me at [ratemomishael@gmail.com](ratemomishael@gmail.com)
+If you have any question or contributions, please email me at [ogendi18@gmail.com](ogendi18@gmail.com)
 
 LinkedIn - [Derick Mokonge](https://www.linkedin.com/in/derick-ogendi/)
 

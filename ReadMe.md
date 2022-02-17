@@ -4,7 +4,8 @@
 ~ Derick Ogendi
 ## Description
 
-A Flask framework { python } application that allows users t0 use 60 second to give a pitch. 
+A Flask framework { python } application that allows users to use 60 second to give a pitch. 
+
 ## User Story ( BDD ) 
 The user would like to.... :
 +  see the pitches other people have posted.

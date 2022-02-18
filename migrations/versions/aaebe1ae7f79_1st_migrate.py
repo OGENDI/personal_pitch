@@ -1,8 +1,8 @@
-""" second miration
+""" 1st migrate
 
-Revision ID: bf4e800c55fa
+Revision ID: aaebe1ae7f79
 Revises: 
-Create Date: 2022-02-09 18:19:35.194765
+Create Date: 2022-02-18 08:54:30.142842
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'bf4e800c55fa'
+revision = 'aaebe1ae7f79'
 down_revision = None
 branch_labels = None
 depends_on = None

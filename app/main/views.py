@@ -10,9 +10,9 @@ from flask import abort
 from .forms import UpdateProfile
 from .. import db
 from .. import uploads
-from . import root
+from . import main
 
-@root.route('/')
+@main.route('/')
 def index():
     
     all_pitches = Pitches.query.order_by(Pitches.posted.desc())   
@@ -22,14 +22,14 @@ def index():
     
     return render_template('index.html', title=title, pitches= all_pitches )
 
-@root.route('/love')
+@main.route('/love')
 def love():
     
     love = Pitches.query.filter_by(category = "Love")     
     title='Love Pitches'
     return render_template('love.html', title=title, Love=love)
 
-@root.route('/life')
+@main.route('/life')
 def life():
     
     life = Pitches.query.filter_by(category = "Life")    
@@ -37,7 +37,7 @@ def life():
     return render_template('life.html', title=title, Life=life)
 
 
-@root.route('/business')
+@main.route('/business')
 def business():
     
     business = Pitches.query.filter_by(category = "Business")    
@@ -45,14 +45,14 @@ def business():
     return render_template('business.html', title=title, Business=business)
 
 
-@root.route('/coding')
+@main.route('/coding')
 def coding():
     
     coding = Pitches.query.filter_by(category = "Coding")    
     title='Coding Pitches'
     return render_template('coding.html', title=title, Coding=coding)
 
-@root.route('/finance')
+@main.route('/finance')
 def finance():
     
     finance = Pitches.query.filter_by(category = "Finance")    
@@ -60,7 +60,7 @@ def finance():
     return render_template('business.html', title=title, Business=finance)
 
 
-@root.route('/pitches/new/', methods =['GET', 'POST'])
+@main.route('/pitches/new/', methods =['GET', 'POST'])
 @login_required
 def new_pitch():
     # mine_upvotes = Upvotes.query.filter_by( pitch_id= Pitches.pid)
@@ -76,11 +76,11 @@ def new_pitch():
         db.session.add(new_pitch)
         db.session.commit()
         
-        return redirect(url_for('root.index'))
+        return redirect(url_for('main.index'))
     return render_template('pitches.html', form= pitch_form)
         
         
-@root.route('/user/<uname>')
+@main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
     my_pitches = Pitches.get_my_pitches(user.id) 
@@ -95,7 +95,7 @@ def profile(uname):
 
 
 #a route that will process our form(image/photo upload form) submission request
-@root.route('/user/<uname>/update/',methods= ['GET','POST'])
+@main.route('/user/<uname>/update/',methods= ['GET','POST'])
 @login_required
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -115,7 +115,7 @@ def update_profile(uname):
     return render_template('profile/update.html',form =form)
 
 #a route that will process our form(image/photo upload form) submission request
-@root.route('/user/<uname>/update/pic',methods= ['POST'])
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
     user = User.query.filter_by(username = uname).first()
@@ -127,10 +127,10 @@ def update_pic(uname):
         db.session.add(user)
         db.session.commit()
        
-    return redirect(url_for('root.profile',uname=uname))
+    return redirect(url_for('main.profile',uname=uname))
 
 
-@root.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
+@main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
 @login_required
 def new_comment(pitch_id):
     form = Comment()
@@ -149,7 +149,7 @@ def new_comment(pitch_id):
     return render_template('comments.html', form = form, comment = all_comments, pitch = pitch )
 
 
-@root.route('/pitch/upvote/<int:pitch_id>/upvote', methods = ['GET', 'POST'])
+@main.route('/pitch/upvote/<int:pitch_id>/upvote', methods = ['GET', 'POST'])
 @login_required
 def upvote_pitch(pitch_id):
     pitch = Pitches.query.get(pitch_id)
@@ -170,7 +170,7 @@ def upvote_pitch(pitch_id):
         else:
             return  redirect(request.referrer)
 
-@root.route('/pitch/downvote/<int:pitch_id>/downvote', methods = ['GET', 'POST'])
+@main.route('/pitch/downvote/<int:pitch_id>/downvote', methods = ['GET', 'POST'])
 @login_required
 def downvote_pitch(pitch_id):
     pitch = Pitches.query.get(pitch_id)

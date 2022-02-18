@@ -35,7 +35,7 @@ def create_app(config_name):
     simple.init_app(app)
     
     # Blueprint registration 
-    from .main import  root as app_blueprint
+    from .main import  main as app_blueprint
     app.register_blueprint(app_blueprint)
     
      # registerring auth Blueprint
